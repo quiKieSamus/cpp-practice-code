@@ -8,7 +8,7 @@ using namespace std;
 
 struct Deck
 {
-    string card[12];
+    string card[13];
 };
 
 // to use for iteration to give each deck's individual card value
@@ -17,17 +17,18 @@ string giveCardValue(int index)
     string value;
     if (index == 0)
     {
-        return value = "as";
+        value = "as";
+        return value;
     }
-    if (index == 10)
+    else if (index == 10)
     {
         return value = "j";
     }
-    if (index == 11)
+    else if (index == 11)
     {
         return value = "q";
     }
-    if (index == 12)
+    else if (index == 12)
     {
         return value = "k";
     }
@@ -35,16 +36,14 @@ string giveCardValue(int index)
     {
         return value = to_string(index + 1);
     }
-
-    return value;
 }
 
 void poker(int players, int cardsPerPlayer, string deck[])
 {
-    for (int index = 0; index < 52; index++)
-    {
-        cout << deck[index] << " es la posicion: " << index << endl;
-    }
+    // for (int index = 0; index < 52; index++)
+    // {
+    //     cout << deck[index] << " es la posicion: " << index << endl;
+    // }
 
     int deckPosition = 0;
     for (int i = 1; i <= players; i++)
@@ -55,7 +54,7 @@ void poker(int players, int cardsPerPlayer, string deck[])
             for (int j = 0; j < cardsPerPlayer; j++)
             {
                 cout << deck[deckPosition] << endl;
-                deckPosition = j++;
+                deckPosition++;
             }
         }
         else
@@ -85,47 +84,15 @@ int main()
     // spades.type = "spades";
 
     // fill each deck's type cards from as to k
-    for (int i = 0; i < 4; i++)
+
+    for (int j = 0; j < 13; j++)
     {
-        if (i == 0)
-        {
-            for (int j = 0; j < 13; j++)
-            {
-                diamonds.card[j] = giveCardValue(j);
-            }
-        }
-
-        if (i == 1)
-        {
-            for (int j = 0; j < 13; j++)
-            {
-                hearts.card[j] = giveCardValue(j);
-            }
-        }
-
-        if (i == 2)
-        {
-            for (int j = 0; j < 13; j++)
-            {
-                clubs.card[j] = giveCardValue(j);
-            }
-        }
-
-        if (i == 3)
-        {
-            for (int j = 0; j < 13; j++)
-            {
-                spades.card[j] = giveCardValue(j);
-            }
-        }
-    }
-
-    for (int i = 0; i < 13; i++)
-    {
-        cout << "\ndiamonds: " << diamonds.card[i] << "\n";
-        cout << "\nhearts: " << hearts.card[i] << "\n";
-        cout << "\nclubs: " << clubs.card[i] << "\n";
-        cout << "\nspades: " << spades.card[i] << "\n";
+        string cardValue = giveCardValue(j);
+        diamonds.card[j] = cardValue;
+        hearts.card[j] = cardValue;
+        clubs.card[j] = cardValue;
+        spades.card[j] = cardValue;
+        cout << diamonds.card[j] << " " << hearts.card[j] << " " << clubs.card[j] << " " << spades.card[j] << endl;
     }
 
     // cout << diamonds.card[1];
@@ -133,9 +100,18 @@ int main()
     srand(time(0));
     int randomNumber = rand() % 100;
     random_shuffle(&diamonds.card[0], &diamonds.card[13]);
+    random_shuffle(&hearts.card[0], &hearts.card[13]);
     random_shuffle(&spades.card[0], &spades.card[13]);
     random_shuffle(&clubs.card[0], &clubs.card[13]);
-    random_shuffle(&hearts.card[0], &hearts.card[13]);
+
+    for (int i = 0; i < 13; i++)
+    {
+        cout << diamonds.card[i] << endl;
+        cout << hearts.card[i] << endl;
+        cout << spades.card[i] << endl;
+        cout << clubs.card[i] << endl;
+        cout << "\n"<< i << "\n\n";
+    }
 
     // fill big deck with all cards
     int c = 0;
@@ -170,14 +146,19 @@ int main()
         c++;
     }
 
-    // cout << "Ingrese Cantidad de jugadores: " << endl;
-    // int playerQuantity;
-    // cin >> playerQuantity;
-    // cout << "\nIngrese Cantidad de Cartas a dar a cada jugador: " << endl;
-    // int cardsPerPlayer;
-    // cin >> cardsPerPlayer;
+    for (int i = 0; i < 52; i++)
+    {
+        cout << i << ": " << mainDeck[i] << endl;
+    }
 
-    // poker(playerQuantity, cardsPerPlayer, mainDeck);
+    cout << "Ingrese Cantidad de jugadores: ";
+    int playerQuantity;
+    cin >> playerQuantity;
+    cout << "\nIngrese Cantidad de Cartas a dar a cada jugador: ";
+    int cardsPerPlayer;
+    cin >> cardsPerPlayer;
+
+    poker(playerQuantity, cardsPerPlayer, mainDeck);
 
     return 0;
 }
