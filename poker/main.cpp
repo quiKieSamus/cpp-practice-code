@@ -45,6 +45,14 @@ void poker(int players, int cardsPerPlayer, string deck[])
     //     cout << deck[index] << " es la posicion: " << index << endl;
     // }
 
+    if (cardsPerPlayer*players > 52)
+    {
+        int cardsNeeded = (cardsPerPlayer*players) - 52;
+        cout << "Se necesitan " << cardsNeeded << " carta(s) para jugar apropiadamente" << endl;
+        exit(0);   
+    }
+    
+
     int deckPosition = 0;
     for (int i = 1; i <= players; i++)
     {
@@ -63,7 +71,7 @@ void poker(int players, int cardsPerPlayer, string deck[])
             for (int j = deckPosition; j < cardsPerPlayer * i; j++)
             {
                 cout << deck[j] << endl;
-                deckPosition = j++;
+                deckPosition++;
             }
         }
     }
